@@ -1,6 +1,6 @@
 <h1>Listing reports</h1>
 
-<table>
+<table class= "table table-striped">
   <thead>
     <tr>
       <th></th>
@@ -11,8 +11,9 @@
 
   <tbody>
     <% @reports.each do |report| %>
-      <tr>
-        <td><%= link_to 'Show', report %></td>
+      <tr> 
+        <td><%= report.text %></td>
+        <td><%= link_to 'Show', report_path(report) %></td>
         <td><%= link_to 'Edit', edit_report_path(report) %></td>
         <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
