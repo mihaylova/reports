@@ -1,5 +1,6 @@
 MelonCourse::Application.routes.draw do
   resources :reports
+  resources :categories
 
   devise_for :users
 
