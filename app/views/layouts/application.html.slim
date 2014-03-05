@@ -1,0 +1,20 @@
+doctype 5
+html
+  head
+    title DatingSite
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  body
+    header.navbar.navbar-fixed-top.navbar-inverse
+      nav.navbar-inner
+        .container
+          = render 'layouts/navigation'
+    main role="main"
+      .container
+        .content
+          .row
+            .span12
+              = render 'layouts/messages'
+              = yield
+          footer
