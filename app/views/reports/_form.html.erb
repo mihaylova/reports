@@ -1,4 +1,4 @@
-<%= form_for(@report) do |f| %>
+<%= simple_form_for(@report) do |f| %>
   <% if @report.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
@@ -11,6 +11,9 @@
     </div>
   <% end %>
 
+
+  <%= f.input :text %>
+  <%=  f.association :category, as: :radio_buttons %>
   <div class="actions">
     <%= f.submit %>
   </div>

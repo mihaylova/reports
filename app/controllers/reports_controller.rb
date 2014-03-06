@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+
+  #load_and_authorize_resource
 
   # GET /reports
   # GET /reports.json
@@ -70,6 +71,6 @@ class ReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
-      params[:report]
+      params.require(:report).permit(:text, :category_id).merge({user: current_user})
     end
 end
