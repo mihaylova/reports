@@ -7,7 +7,7 @@ gem 'rails', '4.0.0'
 gem 'pg'
 
 #user devise
-gem 'devise'
+gem 'devise','~> 3.2.0'
 
 #use cancan
 gem "cancan"
@@ -18,6 +18,7 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 gem "slim-rails"
 gem 'simple_form'
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 
 

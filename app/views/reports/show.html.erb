@@ -1,8 +1,0 @@
-<p id="notice"><%= notice %></p>
-
-<%= @report.title %>
-<%= @report.description %>
-<%if can? :edit, @report %>
-  <%= link_to 'Edit', edit_report_path(@report) %> |
-<%end%>
-<%= link_to 'Back', reports_path %>
