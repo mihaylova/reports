@@ -1,0 +1,23 @@
+h1 Listing reports
+table.table.table-striped
+  thead
+    tr
+      th
+      th
+      th
+      th
+  tbody
+    - @reports.each do |report|
+      tr
+        td= report.text
+        - if can? :read, report
+          td= link_to 'Show', report_path(report)
+        - if can? :edit, report
+          td= link_to 'Edit', edit_report_path(report)
+        - if can? :destroy, report
+          td= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+
+- if can? :create, Report
+  = link_to 'New Report', new_report_path

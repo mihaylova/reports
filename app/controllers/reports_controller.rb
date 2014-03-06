@@ -1,7 +1,8 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
 
-  #load_and_authorize_resource
+  load_and_authorize_resource skip_load_resource only: [:create] 
+
 
   # GET /reports
   # GET /reports.json
