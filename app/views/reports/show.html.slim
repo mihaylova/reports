@@ -1,0 +1,18 @@
+p#notice= notice
+.post.hero-unit
+  .well.well-small.pull-right.author
+    p
+      = "Created before #{time_ago_in_words (@report.created_at)} by #{@report.user.email}"
+
+  h1
+    = @report.title
+  .text
+    == @report.description
+
+
+  
+
+  - if can? :manage, @report
+    .controls.btn-group.pull-right
+      = link_to "edit", edit_report_path(@report), class: 'btn'
+      = link_to "delete", @report, class: 'btn',:method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }

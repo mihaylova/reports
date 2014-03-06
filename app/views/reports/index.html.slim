@@ -1,23 +1,26 @@
 h1 Listing reports
-table.table.table-striped
-  thead
-    tr
-      th
-      th
-      th
-      th
-  tbody
-    - @reports.each do |report|
-      tr
-        td= report.title
-        - if can? :read, report
-          td= link_to 'Show', report_path(report)
-        - if can? :edit, report
-          td= link_to 'Edit', edit_report_path(report)
-        - if can? :destroy, report
-          td= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' }
+.reports
+  - @reports.each do |report|
+    .well.well-small
+      .row
+        .span10
+          span.title
+            - if can? :read, report
+              = link_to report.title, report_path(report)
+            -else
+              = report.title
+          span.text
+            |  - 
+            == strip_tags(report.description).truncate(200, separator: ' ')
 
-br
+          
+          br
+        .controls.btn-group.pull-right
+          - if can? :edit, report
+            = link_to "edit", edit_report_path(report), class: 'btn btn-mini'
+          - if can? :destroy, report
+            = link_to "delete", report, class: 'btn btn-mini',:method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+    hr
 
 - if can? :create, Report
   = link_to 'New Report', new_report_path
