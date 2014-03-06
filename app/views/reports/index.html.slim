@@ -9,7 +9,7 @@ table.table.table-striped
   tbody
     - @reports.each do |report|
       tr
-        td= report.text
+        td= report.title
         - if can? :read, report
           td= link_to 'Show', report_path(report)
         - if can? :edit, report

@@ -12,7 +12,8 @@
   <% end %>
 
 
-  <%= f.input :text %>
+  <%= f.input :title %>
+  <%= f.input :description %> 
   <%=  f.association :category, as: :radio_buttons %>
   <div class="actions">
     <%= f.submit %>
