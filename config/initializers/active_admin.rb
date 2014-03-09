@@ -186,20 +186,34 @@ ActiveAdmin.setup do |config|
   #
   # To change the default utility navigation to show a link to your website & a logout btn
   #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :utility_navigation do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #       admin.add_logout_button_to_menu menu
-  #     end
-  #   end
+   # config.namespace :admin do |admin|
+   #   admin.build_menu :utility_navigation do |menu|
+   #     menu.add label: "Home", url: "/", :priority => 0
+   #     admin.add_logout_button_to_menu menu
+   #      menu.add :label => "Sites" do |sites|
+   #        sites.add :label => "Google", :url => "http://google.com", :html_options => { :target => :blank }
+   #        sites.add :label => "Facebook", :url => "http://facebook.com"
+   #        sites.add :label => "Github", :url => "http://github.com"
+   #      end
+   #   end
+   # end
+   # config.namespace :admin do |admin|
+   #    menu.add :label => "Sites" do |sites|
+   #         sites.add :label => "Google", :url => "http://google.com", :html_options => { :target => :blank }
+   #         sites.add :label => "Facebook", :url => "http://facebook.com"
+   #         sites.add :label => "Github", :url => "http://github.com"
+   #       end
+   #  end
+
   #
   # If you wanted to add a static menu item to the default menu provided:
   #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :default do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #     end
-  #   end
+    config.namespace :admin do |admin|
+      admin.build_menu :default do |menu|
+        menu.add label: "Home", url: "/", :priority => 0
+        menu.add :label => "Users", :priority => 1
+      end
+    end
 
 
   # == Download Links
@@ -239,5 +253,7 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+
+
 
 end
