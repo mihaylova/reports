@@ -18,7 +18,12 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 gem "slim-rails"
 gem 'simple_form'
+
+#administration
 gem 'activeadmin', github: 'gregbell/active_admin'
+#gem "meta_search"
+#gem 'formtastic', github: 'justinfrench/formtastic'
+#gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 
 
 
