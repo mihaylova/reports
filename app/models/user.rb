@@ -11,10 +11,5 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :reports
 
   validates :name, presence: true
-  validates :role, presence: true
-  validates :role, :inclusion => { :in => %w(editor author) }
 
-  def editor?
-    self.role == "editor"
-  end
 end

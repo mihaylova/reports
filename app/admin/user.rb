@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :name, :admin, :password, :password_confirmation
+  permit_params :email, :name, :editor, :password, :password_confirmation
   menu priority: 3
   menu :label => "Authors"
   menu :parent => "Users"
@@ -34,7 +34,7 @@ ActiveAdmin.register User do
   end
 
   scope :editors do |users|
-    User.where(role: "editor")
+    User.where(editor: true)
   end
 
   action_item :only => :show do
@@ -57,11 +57,9 @@ ActiveAdmin.register User do
 
     column("Name", nil, sortable: :name) {|user| link_to user.name, admin_user_path(user)}
     column :email
-    column :admin
+    column :editor
     column :created_at
-    column :current_sign_in_at
-    column :current_sign_in_ip
-    column :sign_in_count
+    column :updated_at
     actions
   end
   
@@ -71,7 +69,7 @@ ActiveAdmin.register User do
       attributes_table_for user  do
         row :name
         row :email
-        row :role
+        row ("Editor"){ |user| user.editor? ? "YES" : "NO" }
         row :created_at
         row :updated_at
       end
@@ -94,6 +92,7 @@ ActiveAdmin.register User do
     f.inputs "Details" do
       f.input :name
       f.input :email
+      f.input :editor
     end
     f.inputs "Change Password" do
       f.input :password
