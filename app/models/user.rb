@@ -6,4 +6,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :reports
+  accepts_nested_attributes_for :reports
+
+  validates :name, presence: true
+  validates :role, presence: true
+  validates :role, :inclusion => { :in => %w(editor author) }
+
+  def editor?
+    this.role == "editor"
+  end
 end
