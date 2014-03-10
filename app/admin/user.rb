@@ -61,9 +61,11 @@ ActiveAdmin.register User do
   index do
     selectable_column
 
-    column("Name", nil, sortable: :name) {|user| link_to user.name, admin_user_path(user)}
+    column("Name", sortable: :name) {|user| link_to user.name, admin_user_path(user)}
     column :email
     column :editor
+    column ("Reports") {|user| link_to user.reports_count, reports_admin_user_path(user)}
+    # column ("Reports", sortable: :reports_count) {|user| link_to user.reports_count, reports_admin_user_path(user)}
     column :created_at
     column :updated_at
     column ("") {|user| link_to "become", become_admin_user_path(user)}
