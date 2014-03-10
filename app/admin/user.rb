@@ -45,10 +45,6 @@ ActiveAdmin.register User do
   end
 
   action_item :only => :show do
-    link_to('Add report', root_path)
-  end
-
-  action_item :only => :show do
     link_to('Become', become_admin_user_path(user))
   end
   
