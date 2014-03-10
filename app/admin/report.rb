@@ -1,6 +1,6 @@
 ActiveAdmin.register Report do
 menu priority: 4
-permit_params :title, :description, :user_id, :category_id
+permit_params :title, :description, :user_id, :category_id, {permissions_attributes: [:author_can_edit, :author_can_delete, :editor_can_edit, :editor_can_delete]}
 
 #belongs_to :user
 #http://localhost:3000/admin/users/:user_id/reports/:report_id - show route
@@ -62,7 +62,7 @@ permit_params :title, :description, :user_id, :category_id
     def send_user_msg
       message = "Your report: '#{@report_title}' was #{@action}"
       #TODO: checks
-      Notification.create(user: @user_id, admin_user: current_admin_user, message: message)
+      Notification.create(user_id: @user_id, admin_user: current_admin_user, message: message)
     end
 
     def set_user_msg
@@ -83,7 +83,7 @@ permit_params :title, :description, :user_id, :category_id
     actions
   end
 
-    show do |report|
+  show do |report|
     panel "Report Details" do
       attributes_table_for report  do
         row :title
@@ -94,7 +94,32 @@ permit_params :title, :description, :user_id, :category_id
         row :updated_at
       end
     end
+    panel "Permissions" do
+      attributes_table_for report.permissions  do
+        row ("Author can edit report"){ |permissions| permissions.author_can_edit? ? "YES" : "NO" }
+        row ("Author can delete report"){ |permissions| permissions.author_can_delete? ? "YES" : "NO" }
+        row ("Editor can edit report"){ |permissions| permissions.editor_can_edit? ? "YES" : "NO" }
+        row ("Editor can delete report"){ |permissions| permissions.editor_can_delete? ? "YES" : "NO" }
+      end
+    end
     active_admin_comments
+  end
+
+  form do |f|
+    f.semantic_errors *f.object.errors.keys
+    f.inputs "Details" do
+      f.input :user
+      f.input :category
+      f.input :title
+      f.input :description
+    end
+    f.inputs "Meta Data", :for => [:permissions, f.object.permissions || Permissions.new] do |pf|
+      pf.input :author_can_edit
+      pf.input :author_can_delete
+      pf.input :editor_can_edit
+      pf.input :editor_can_delete
+    end
+    f.actions
   end
 
 
