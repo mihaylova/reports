@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def updated?
+    self.updated_at >= 3.seconds.ago
+  end
+
 end
