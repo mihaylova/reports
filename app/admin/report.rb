@@ -47,29 +47,22 @@ permit_params :title, :description, :user_id, :category_id, {permissions_attribu
   # end
 
 
-  # controller do
-
-    # collection_action :set_user do
-    #   @report = Report.new(user: User.last)
-    #   render action: "new", :layout => false
-    # end
-  # end
-
   controller do
     after_action :send_user_msg, only: [:update, :destroy]
     before_action :set_user_msg, only: [:update, :destroy]
 
+    #TODO: Refactoring
     def send_user_msg
-      message = "Your report: '#{@report_title}' was #{@action}"
-      #TODO: checks
-      Notification.create(user_id: @user_id, admin_user: current_admin_user, message: message)
+      if Report.updated_or_deleted?(params[:id], @action)
+        Notification.create(user_id: @user_id, admin_user: current_admin_user, message: @message)
+      end
     end
 
     def set_user_msg
       report = Report.find(params[:id])
       @user_id = report.user.id
-      @report_title = report.title
       @action = params[:commit] == "Update Report" ? "updated" : "deleted"
+      @message = "Your report: '#{report.title}' was #{@action}"
     end
   end
 

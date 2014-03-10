@@ -16,4 +16,10 @@ class Report < ActiveRecord::Base
   def set_permissions
     Permissions.create(report: self) unless self.permissions
   end
+
+  def self.updated_or_deleted?(id, action)
+    #TODO: Refactoring
+    report = Report.find_by_id(id)
+    (!report && action == "deleted") || (action == "updated" && report.updated_at >= 3.seconds.ago)
+  end
 end
