@@ -4,6 +4,20 @@ ActiveAdmin.register User do
   menu :label => "Authors"
   menu :parent => "Users"
 
+  controller do
+    before_action :check_for_pass, only: :update
+
+    def check_for_pass
+      #use request.params instead params
+      params =  request.params["user"]
+      if params[:password] == ""
+        params.delete(:password)
+        params.delete(:password_confirmation)
+      end
+    end
+  end
+
+
   scope :all do |users|
     User.all
   end
@@ -19,7 +33,6 @@ ActiveAdmin.register User do
   action_item :only => :show do
     link_to('Add report', root_path)
   end
-
   
   index do
     selectable_column
