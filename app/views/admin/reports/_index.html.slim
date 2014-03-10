@@ -1,0 +1,21 @@
+h1 Listing reports
+.reports
+  - @reports.each do |report|
+    .well.well-small
+      .row
+        .span10
+          span.title
+            - if can? :read, report
+              = link_to report.title, report_path(report)
+            -else
+              = report.title
+          span.text
+            |  - 
+            == strip_tags(report.description).truncate(200, separator: ' ')
+
+          
+          br
+        .controls.btn-group.pull-right
+          = link_to "edit", edit_admin_report_path(report), class: 'btn btn-mini'
+          = link_to "delete", admin_report_path, class: 'btn btn-mini',:method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+    hr

@@ -17,6 +17,10 @@ ActiveAdmin.register User do
     end
   end
 
+  member_action :reports do
+    @user = User.find(params[:id])
+    @reports = @user.reports.page(params[:page]).per(10)
+  end
 
   scope :all do |users|
     User.all
@@ -26,8 +30,11 @@ ActiveAdmin.register User do
     User.where(role: "editor")
   end
 
-  action_item :only => [:show, :index] do
-    link_to('View reports', root_path)
+  action_item :only => :show do
+    link_to('View reports', reports_admin_user_path(user))
+
+    #Some way.... :? :|
+    #link_to('View reports', admin_reports_path + "?&q%5Buser_id_in%5D%5B%5D=#{user.id}")
   end
 
   action_item :only => :show do
