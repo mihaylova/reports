@@ -4,6 +4,8 @@ ActiveAdmin.register User do
   menu :label => "Authors"
   menu :parent => "Users"
 
+  
+
   controller do
     before_action :check_for_pass, only: :update
 
@@ -15,6 +17,11 @@ ActiveAdmin.register User do
         params.delete(:password_confirmation)
       end
     end
+  end
+
+  member_action :become do
+    sign_in(:user, User.find(params[:id]))
+    redirect_to root_path
   end
 
   member_action :reports do
@@ -39,6 +46,10 @@ ActiveAdmin.register User do
 
   action_item :only => :show do
     link_to('Add report', root_path)
+  end
+
+  action_item :only => :show do
+    link_to('Become', become_admin_user_path(user))
   end
   
   index do
