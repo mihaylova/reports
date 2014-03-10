@@ -13,6 +13,6 @@ class User < ActiveRecord::Base
   validates :role, :inclusion => { :in => %w(editor author) }
 
   def editor?
-    this.role == "editor"
+    self.role == "editor"
   end
 end
