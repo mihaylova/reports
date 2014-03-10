@@ -55,7 +55,26 @@ permit_params :title, :description, :user_id, :category_id
   #     render partial: "index", locals: {reports: reports}
   # end
 
+
+
+    show do |report|
+    panel "Report Details" do
+      attributes_table_for report  do
+        row :title
+        row :description
+        row ("Autor") { |report| link_to report.user.name, admin_user_path(report.user) }
+        row :category
+        row :created_at
+        row :updated_at
+      end
+    end
+    active_admin_comments
+  end
+
+
   filter :user, :as => :check_boxes, :label => 'Authors'
+  filter :category, :as => :check_boxes
+  filter :created_at
   config.sort_order = "created_at_desc"
   config.per_page = 10
   
