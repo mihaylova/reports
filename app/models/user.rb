@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :reports
+  has_many :notifications
+
   accepts_nested_attributes_for :reports
 
   validates :name, presence: true

@@ -39,6 +39,23 @@ permit_params :title, :description, :user_id, :category_id
 #     end
 #   end
 
+
+
+  #Ако искам user/:id/reports и reports да изглеждат еднакво (Много играчка да се докара дизайн)
+  # index do 
+  #     render partial: "index", locals: {reports: reports}
+  # end
+
+
+  controller do
+    after_action :send_user_msg, only: [:update, :delete]
+
+    def send_user_msg
+      report = Report.find(request.params[:id])
+      Notification.create(user: report.user, admin_user: current_admin_user, message: "some text")
+    end
+  end
+
   index do
     selectable_column
     column("Title", nil, sortable: :title) {|report| link_to report.title, admin_report_path(report)}
@@ -48,14 +65,6 @@ permit_params :title, :description, :user_id, :category_id
     column :updated_at
     actions
   end
-
-
-  #Ако искам user/:id/reports и reports да изглеждат еднакво (Много играчка да се докара дизайн)
-  # index do 
-  #     render partial: "index", locals: {reports: reports}
-  # end
-
-
 
     show do |report|
     panel "Report Details" do
