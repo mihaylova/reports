@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :reports
-  has_many :notifications
+  has_many :reports, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   accepts_nested_attributes_for :reports
 
