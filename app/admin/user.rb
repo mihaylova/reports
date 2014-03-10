@@ -4,6 +4,23 @@ ActiveAdmin.register User do
   menu :label => "Authors"
   menu :parent => "Users"
 
+  scope :all do |users|
+    User.all
+  end
+
+  scope :editors do |users|
+    User.where(role: "editor")
+  end
+
+  action_item :only => [:show, :index] do
+    link_to('View reports', root_path)
+  end
+
+  action_item :only => :show do
+    link_to('Add report', root_path)
+  end
+
+  
   index do
     selectable_column
 
@@ -51,7 +68,6 @@ ActiveAdmin.register User do
         f.input :password
         f.input :password_confirmation
       end
-      
       f.actions
     end
 
