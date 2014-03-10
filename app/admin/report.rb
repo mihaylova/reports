@@ -47,12 +47,29 @@ permit_params :title, :description, :user_id, :category_id
   # end
 
 
+  # controller do
+
+    # collection_action :set_user do
+    #   @report = Report.new(user: User.last)
+    #   render action: "new", :layout => false
+    # end
+  # end
+
   controller do
-    after_action :send_user_msg, only: [:update, :delete]
+    after_action :send_user_msg, only: [:update, :destroy]
+    before_action :set_user_msg, only: [:update, :destroy]
 
     def send_user_msg
-      report = Report.find(request.params[:id])
-      Notification.create(user: report.user, admin_user: current_admin_user, message: "some text")
+      message = "Your report: '#{@report_title}' was #{@action}"
+      #TODO: checks
+      Notification.create(user: @user_id, admin_user: current_admin_user, message: message)
+    end
+
+    def set_user_msg
+      report = Report.find(params[:id])
+      @user_id = report.user.id
+      @report_title = report.title
+      @action = params[:commit] == "Update Report" ? "updated" : "deleted"
     end
   end
 
