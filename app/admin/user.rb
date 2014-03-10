@@ -78,18 +78,24 @@ ActiveAdmin.register User do
     active_admin_comments
   end
 
-   form do |f|
-      f.semantic_errors *f.object.errors.keys
-      f.inputs "Details" do
-        f.input :name
-        f.input :email
-      end
-      f.inputs "Change Password" do
-        f.input :password
-        f.input :password_confirmation
-      end
-      f.actions
+  form do |f|
+    f.semantic_errors *f.object.errors.keys
+    f.inputs "Details" do
+      f.input :name
+      f.input :email
     end
+    f.inputs "Change Password" do
+      f.input :password
+      f.input :password_confirmation
+    end
+    f.actions
+  end
+
+  filter :name
+  filter :email
+  filter :created_at
+  config.sort_order = "created_at_desc"
+  config.per_page = 10
 
 
 end
