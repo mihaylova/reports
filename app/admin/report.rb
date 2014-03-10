@@ -32,12 +32,15 @@ permit_params :title, :description, :user_id, :category_id, {permissions_attribu
 #get "/admin/reports/show_from_autor/:user_id" => 'admin/reports#show_from_autor', as: "show_from_autor_admin_reports"
 # # Can't add param :user_id
 
-# controller do
-#     def show_from_autor
-#       @reports = Report.where(user_id: params[:user_id]).page(params[:page]).per(10)
-#       render action: 'index', :layout => false
-#     end
-#   end
+
+
+controller do
+    def user_reports
+      @reports = Report.where(user_id: params[:user_id]).page(params[:page]).per(10)
+      render action: 'index', :layout => false
+    end
+  end
+#Don't show filters
 
 
 
