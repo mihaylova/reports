@@ -60,6 +60,7 @@ ActiveAdmin.register User do
     column :editor
     column :created_at
     column :updated_at
+    column ("") {|user| link_to "become", become_admin_user_path(user)}
     actions
   end
   
