@@ -1,0 +1,11 @@
+development:
+  FACEBOOK_KEY: 
+  FACEBOOK_SECRET: 
+
+test:
+  FACEBOOK_KEY: 
+  FACEBOOK_SECRET: 
+
+production:
+  FACEBOOK_KEY: 
+  FACEBOOK_SECRET: 
