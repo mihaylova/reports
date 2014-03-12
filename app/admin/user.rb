@@ -33,12 +33,6 @@ ActiveAdmin.register User do
     redirect_to root_path
   end
 
-  # member_action :reports do
-  #   @user = User.find(params[:id])
-  #   @reports = @user.reports.page(params[:page]).per(10)
-  #   #It will render views/admin/users/reports
-  # end
-
   scope :all do |users|
     User.all
   end

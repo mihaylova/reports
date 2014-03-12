@@ -2,53 +2,12 @@ ActiveAdmin.register Report do
 menu priority: 4
 permit_params :title, :description, :user_id, :category_id, {permissions_attributes: [:author_can_edit, :author_can_delete, :editor_can_edit, :editor_can_delete]}
 
-#belongs_to :user
-#http://localhost:3000/admin/users/:user_id/reports/:report_id - show route
-
-
-#ERROR:No route matches {:action=>"index", :controller=>"admin/reports"} missing required keys: [:user_id]
-#get "/admin/reports" => 'admin/reports#show_all', as: "admin_reports"
-
-# controller do 
-#   def show_all
-#     @reports = Report.all.page(params[:page]).per(10)
-#     render :index, :layout => false
-#   end
-# end
-
-
-# collection_action :show_all do 
-#   @reports = Report.all.page(params[:page]).per(10)
-#   render action: 'index', :layout => false
-# end
-#/admin/users/:user_id/reports/show_all
-
-
-# collection_action :show_from_autor do
-#   @reports = Report.where(user_id: params[:user_id]).page(params[:page]).per(10)
-#   render action: 'index', :layout => false
-# end
-# #/admin/reports/show_from_autor
-#get "/admin/reports/show_from_autor/:user_id" => 'admin/reports#show_from_autor', as: "show_from_autor_admin_reports"
-# # Can't add param :user_id
-
-
-
 controller do
     def user_reports
       @reports = Report.where(user_id: params[:user_id]).page(params[:page]).per(10)
       render action: 'index', :layout => false
     end
   end
-#Don't show filters
-
-
-
-  #Ако искам user/:id/reports и reports да изглеждат еднакво (Много играчка да се докара дизайн)
-  # index do 
-  #     render partial: "index", locals: {reports: reports}
-  # end
-
 
   controller do
     after_action :send_user_msg, only: [:update, :destroy]
