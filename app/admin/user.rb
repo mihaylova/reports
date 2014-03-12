@@ -8,14 +8,10 @@ ActiveAdmin.register User do
 
   controller do
     before_action :check_for_pass, only: :update
-    after_action :send_user_msg, only: :update
+    before_action :add_editor_info, only: :update
 
-    #TODO: Refactoring
-    def send_user_msg
-      user = User.find(params[:id])
-      if user.updated?
-        Notification.create(user: user, admin_user: current_admin_user, message: "Your profile was updated by admin")
-      end
+    def add_editor_info
+      request.params["user"].merge!({editor_id: current_admin_user.id})
     end
 
     def check_for_pass
