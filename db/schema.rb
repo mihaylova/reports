@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312133332) do
+ActiveRecord::Schema.define(version: 20140312135027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,11 +104,11 @@ ActiveRecord::Schema.define(version: 20140312133332) do
     t.string   "provider"
     t.string   "uid"
     t.string   "access_token"
-    t.integer  "editor_id"
+    t.integer  "last_editor_id"
   end
 
-  add_index "users", ["editor_id"], name: "index_users_on_editor_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["last_editor_id"], name: "index_users_on_last_editor_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

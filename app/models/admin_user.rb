@@ -6,5 +6,5 @@ class AdminUser < ActiveRecord::Base
 
   has_many :sent_notifications, as: :sender, class_name: "Notification"
   has_many :edited_reports, as: :editor, class_name: "Report"
-  has_many :edited_users, class_name: "User", as: :editor
+  has_many :edited_users, class_name: "User", as: :last_editor
 end

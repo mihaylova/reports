@@ -7,5 +7,5 @@ describe User do
   it { should validate_presence_of(:name) }
   it { should have_many(:edited_reports) }
   it { should have_many(:sent_notifications) }
-  it { should belong_to(:editor)}
+  it { should belong_to(:last_editor)}
 end
