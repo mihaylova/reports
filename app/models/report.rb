@@ -12,15 +12,18 @@ class Report < ActiveRecord::Base
   accepts_nested_attributes_for :permissions
 
   after_create :set_permissions
+  after_update :send_notification
 
 
-  def set_permissions
-    Permissions.create(report: self) unless self.permissions
-  end
+  private
+    def send_notification
+      if self.user != self.editor
+        Notification.create(user: self.user, sender: self.editor, message: "Your report #{self.title} was updated by administrator")
+      end
+    end
 
-  def self.updated_or_deleted?(id, action)
-    #TODO: Refactoring
-    report = Report.find_by_id(id)
-    (!report && action == "deleted") || (action == "updated" && report.updated_at >= 3.seconds.ago)
-  end
+    def set_permissions
+      Permissions.create(report: self) unless self.permissions
+    end
+
 end
