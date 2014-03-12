@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :name, :editor, :password, :password_confirmation
+  permit_params :email, :name, :editor, :password, :password_confirmation, :last_editor_id
   menu priority: 3
   menu :label => "Authors"
   menu :parent => "Users"
@@ -11,7 +11,7 @@ ActiveAdmin.register User do
     before_action :add_editor_info, only: :update
 
     def add_editor_info
-      request.params["user"].merge!({editor_id: current_admin_user.id})
+      request.params["user"].merge!({last_editor_id: current_admin_user.id})
     end
 
     def check_for_pass
