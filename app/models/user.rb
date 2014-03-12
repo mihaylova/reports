@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :reports, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :sent_notifications, as: :sender, class_name: "Notification"
   has_many :edited_reports, as: :editor, class_name: "Report"
 
 

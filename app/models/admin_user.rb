@@ -4,6 +4,6 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :notifications
-  has_many :reports, as: :editor
+  has_many :sent_notifications, as: :sender, class_name: "Notification"
+  has_many :edited_reports, as: :editor, class_name: "Report"
 end
