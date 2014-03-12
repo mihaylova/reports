@@ -1,6 +1,6 @@
 ActiveAdmin.register Report do
 menu priority: 4
-permit_params :title, :description, :user_id, :category_id, {permissions_attributes: [:author_can_edit, :author_can_delete, :editor_can_edit, :editor_can_delete]}
+permit_params :title, :description, :user_id, :category_id, :editor_id, :editor_type, {permissions_attributes: [:author_can_edit, :author_can_delete, :editor_can_edit, :editor_can_delete]}
 
 controller do
     def user_reports
@@ -10,21 +10,10 @@ controller do
   end
 
   controller do
-    after_action :send_user_msg, only: [:update, :destroy]
-    before_action :set_user_msg, only: [:update, :destroy]
+    before_action :add_editor_info, only: :update
 
-    #TODO: Refactoring
-    def send_user_msg
-      if Report.updated_or_deleted?(params[:id], @action)
-        Notification.create(user_id: @user_id, admin_user: current_admin_user, message: @message)
-      end
-    end
-
-    def set_user_msg
-      report = Report.find(params[:id])
-      @user_id = report.user.id
-      @action = params[:commit] == "Update Report" ? "updated" : "deleted"
-      @message = "Your report: '#{report.title}' was #{@action}"
+    def add_editor_info
+      request.params["report"].merge!({editor_id: current_admin_user.id, editor_type: "AdminUser"})
     end
   end
 
