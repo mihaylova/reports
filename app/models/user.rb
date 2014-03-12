@@ -16,8 +16,11 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
 
-  def updated?
-    self.updated_at >= 3.seconds.ago
-  end
+  after_update :send_notification
+
+  private
+    def send_notification
+      Notification.create(user: self, sender: self.last_editor, message: "Your profile was updated by administrator")
+    end
 
 end
