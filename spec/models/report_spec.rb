@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Report do
   it { should belong_to(:user) }
+  it { should belong_to(:editor) }
   it { should have_one(:permissions).dependent(:destroy) }
   it { should belong_to(:category) }
   it { should validate_presence_of(:title) }

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :reports, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :edited_reports, as: :editor, class_name: "Report"
+
 
   accepts_nested_attributes_for :reports
 

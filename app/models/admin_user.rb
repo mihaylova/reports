@@ -5,4 +5,5 @@ class AdminUser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :notifications
+  has_many :reports, as: :editor
 end

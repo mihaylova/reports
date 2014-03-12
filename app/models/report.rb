@@ -1,5 +1,6 @@
 class Report < ActiveRecord::Base
   belongs_to :user, counter_cache: true
+  belongs_to :editor, polymorphic: true
   belongs_to :category
   has_one :permissions, dependent: :destroy
   

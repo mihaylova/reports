@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310213754) do
+ActiveRecord::Schema.define(version: 20140312122517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20140310213754) do
     t.integer  "category_id"
     t.string   "title"
     t.text     "description"
+    t.integer  "editor_id"
+    t.string   "editor_type"
   end
 
   create_table "users", force: true do |t|
@@ -98,6 +100,9 @@ ActiveRecord::Schema.define(version: 20140310213754) do
     t.string   "name"
     t.boolean  "editor",                 default: false
     t.integer  "reports_count",          default: 0
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "access_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
