@@ -1,6 +1,8 @@
 class Report < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   belongs_to :editor, polymorphic: true
+  belongs_to :destroyer, polymorphic: true
+
   belongs_to :category
   has_one :permissions, dependent: :destroy
   
@@ -12,13 +14,20 @@ class Report < ActiveRecord::Base
   accepts_nested_attributes_for :permissions
 
   after_create :set_permissions
-  after_update :send_notification
+  after_update :send_update_notification
+  after_destroy :send_destroy_notification
 
 
   private
-    def send_notification
-      if self.user != self.editor
+    def send_update_notification
+      if self.editor && self.user != self.editor
         Notification.create(user: self.user, sender: self.editor, message: "Your report #{self.title} was updated by administrator")
+      end
+    end
+
+    def send_destroy_notification
+      if self.destroyer && self.destroyer != self.user
+        Notification.create(user: self.user, sender: self.destroyer, message: "Your report #{self.title} was deleted by administrator")
       end
     end
 

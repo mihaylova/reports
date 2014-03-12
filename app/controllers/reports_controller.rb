@@ -57,6 +57,7 @@ class ReportsController < ApplicationController
   # DELETE /reports/1
   # DELETE /reports/1.json
   def destroy
+    @report.update(editor: nil, destroyer: current_user)
     @report.destroy
     respond_to do |format|
       format.html { redirect_to reports_url }

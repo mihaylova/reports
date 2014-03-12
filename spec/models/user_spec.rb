@@ -6,6 +6,7 @@ describe User do
   it { should have_many(:notifications).dependent(:destroy) }
   it { should validate_presence_of(:name) }
   it { should have_many(:edited_reports) }
+  it { should have_many(:destroyed_reports) }
   it { should have_many(:sent_notifications) }
   it { should belong_to(:last_editor)}
 end

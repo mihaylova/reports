@@ -11,16 +11,15 @@ controller do
 
   controller do
     before_action :add_editor_info, only: :update
-    before_action :save_editor_info, only: :destroy
+    before_action :save_destroyer_info, only: :destroy
 
     def add_editor_info
       request.params["report"].merge!({editor_id: current_admin_user.id, editor_type: "AdminUser"})
     end
 
-    def save_editor_info
-      Report.find(request.params[:id]).update(editor_id: current_admin_user.id, editor_type: "AdminUser")
+    def save_destroyer_info
+      Report.find(request.params[:id]).update(editor: nil, destroyer: current_admin_user)
     end
-
   end
 
   index do
