@@ -6,9 +6,10 @@ class Ability
     #
        user ||= User.new # guest user (not logged in)
        alias_action :create, :read, :update, :destroy, :to => :crud
-       can :read, :all
 
-      if user.editor?
+      if user.new_record?
+        can :read, :all
+      elsif user.editor?
         can :create, :all
         can :read, :all
         can :update, Report, permissions: {editor_can_edit: true}
