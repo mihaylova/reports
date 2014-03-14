@@ -19,6 +19,8 @@ gem "twitter-bootstrap-rails"
 gem "slim-rails"
 gem 'simple_form'
 
+gem "paperclip", "~> 4.1"
+
 #administration
 gem 'activeadmin', github: 'gregbell/active_admin'
 #gem "meta_search"
