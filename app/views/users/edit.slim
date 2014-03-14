@@ -1,0 +1,4 @@
+= simple_form_for @user, :url => update_account_path, :method => :post, :html => { :multipart => true } do |f|
+  =f.input :name
+  = f.file_field :image
+  = f.submit "Update"

@@ -5,6 +5,9 @@ MelonCourse::Application.routes.draw do
   resources :reports
   resources :categories
 
+  get "/account/edit" => "users#edit", as: "edit_account"
+  post "/account/edit" => "users#update", as: "update_account"
+
   devise_for :users
 
   root to: "reports#index"
