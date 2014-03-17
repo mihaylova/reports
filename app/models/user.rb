@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   after_update :send_notification
 
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :image, :styles => {:small => "50x50#", large: "700x700" }
 
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
