@@ -2,7 +2,9 @@ MelonCourse::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get "/admin/users/:user_id/reports" => 'admin/reports#user_reports', as: "reports_admin_user"
-  resources :reports
+  resources :reports do
+    resources :pictures, except: [:new, :edit, :update]
+  end
   resources :categories
 
   get "/account/edit" => "users#edit", as: "edit_account"

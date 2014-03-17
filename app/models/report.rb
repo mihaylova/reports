@@ -6,6 +6,7 @@ class Report < ActiveRecord::Base
   belongs_to :category
   has_one :permissions, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  # accepts_nested_attributes_for :pictures
   
   validates :title, presence: true
   validates :description, presence: true
