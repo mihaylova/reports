@@ -1,0 +1,13 @@
+.row
+  .span10.offset1
+    .hero-unit
+      h5 Account info
+      .user-data
+        table
+          tr
+            td Email:
+            td= @user.email
+          tr
+            td Name:
+            td= @user.name
+      = image_tag @user.image.url(:large), class: "img-polaroid"

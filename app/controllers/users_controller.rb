@@ -1,16 +1,25 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :set_user
 
   def edit
-    @user = current_user
+  end
+
+  def show
   end
 
 
   def update
-    @user = current_user.update(user_params)
-    redirect_to edit_account_path
+    @user.update(user_params)
+    render :show
   end
 
-  def user_params
-    params.require(:user).permit(:name, :image)
-  end
+  private
+    def user_params
+      params.require(:user).permit(:name, :image)
+    end
+
+    def set_user
+      @user = current_user
+    end
 end
