@@ -1,10 +1,15 @@
+.gallery
+  -@pictures.each do |pic|
+    - unless pic.new_record?
+      = link_to image_tag(pic.image.url(:small), class: "img-polaroid"), report_picture_path(@report, pic)
+      = link_to "delete", report_picture_path(@report, pic), class: 'btn btn-mini',:method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
 
--@pictures.each do |pic|
-  - unless pic.new_record?
-    = link_to image_tag(pic.image.url(:small), class: "img-polaroid"), report_picture_path(@report, pic)
-    = link_to "delete", report_picture_path(@report, pic), class: 'btn',:method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
-
-
+br
+br
+hr
+hr
+hr
+.add-picture
 = simple_form_for @picture, :url => report_pictures_path, :method => :post, :html => { :multipart => true, class: "form-horizontal" } do |p|
   = p.file_field :image
   = p.submit "Add new picture"

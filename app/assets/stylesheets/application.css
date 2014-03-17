@@ -18,4 +18,11 @@ body { padding-top: 120px; }
 .logged-info{
   color: white;
   padding-top: 16px;
+  padding-left: 7px;
+}
+
+
+textarea {
+  width: 913px;
+  height: 428px;
 }

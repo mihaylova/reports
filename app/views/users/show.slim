@@ -11,3 +11,5 @@
             td Name:
             td= @user.name
       = image_tag @user.image.url(:large), class: "img-polaroid"
+    .pull-right
+      =link_to "Edit profile", edit_account_path, class: "btn"
