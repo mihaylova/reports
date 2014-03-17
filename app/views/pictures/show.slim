@@ -1,1 +1,15 @@
-=image_tag(@picture.image.url(:large), class: "img-polaroid")
+= javascript_include_tag "application", "data-turbolinks-track" => true
+= stylesheet_link_tag    "bootstrap_and_overrides", media: "all", "data-turbolinks-track" => true
+= stylesheet_link_tag    "pictures", media: "all", "data-turbolinks-track" => true
+
+
+.gallery
+  .pull-right
+    button#close-gallery.btn.btn-inverse X
+  .image
+    =image_tag(@picture.image.url(:large), class: "img-polaroid")
+  .navigators
+    =link_to "<<", report_picture_path(@report, @previous) if @previous
+    =link_to ">>", report_picture_path(@report, @next) if @next
+
+

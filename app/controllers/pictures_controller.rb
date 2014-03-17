@@ -19,6 +19,11 @@ class PicturesController < ApplicationController
 
   def show 
     @picture = Picture.find(params[:id])
+    index = @report.pictures.index(@picture)
+    size = @report.pictures.size
+    @next = index == size-1 ? nil : @report.pictures[index+1]
+    @previous = index == 0 ? nil : @report.pictures[index-1]
+    render layout: false
   end
 
   private
