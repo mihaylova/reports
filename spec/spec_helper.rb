@@ -6,6 +6,8 @@ require 'rspec/autorun'
 require 'capybara/rspec'
 require "paperclip/matchers"
 
+include ActionView::Helpers::DateHelper
+include ActionDispatch::TestProcess
 include Warden::Test::Helpers
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -44,4 +46,6 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   config.include Paperclip::Shoulda::Matchers
+  config.include Devise::TestHelpers, :type => :controller
+
 end
