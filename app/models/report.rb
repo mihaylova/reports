@@ -5,6 +5,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :category
   has_one :permissions, dependent: :destroy
+  has_many :pictures, dependent: :destroy
   
   validates :title, presence: true
   validates :description, presence: true
