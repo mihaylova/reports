@@ -16,9 +16,11 @@ html xmlns:fb="http://ogp.me/ns/fb#"
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
+    script src="//connect.facebook.net/en_US/all.js"
   body
     #fb-root
     javascript:
+      FB.init({appId: "135675926603185", status: true, cookie: true});
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -39,5 +41,4 @@ html xmlns:fb="http://ogp.me/ns/fb#"
               = render 'layouts/messages'
               = yield
           footer
-            .fb-like data-href="http://9gag.com/gag/a3Yb6DQ" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"
-            .fb-comments data-href="http://9gag.com/gag/a3Yb6DQ" data-numposts="5" data-colorscheme="light"
+            
