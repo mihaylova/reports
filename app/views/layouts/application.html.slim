@@ -1,11 +1,32 @@
 doctype 5
-html
+html xmlns:fb="http://ogp.me/ns/fb#"
   head
+    meta property="fb:app_id" content="135675926603185"
+    meta property="og:site_name" content="Reports"
+    meta property="og:title" content="Reports"
+    meta property="og:type" content="article"
+    meta property="og:url" content="some_url"
+    meta property="og:image" content="path_to_some_image"
+    meta property="og:locale" content="en_US"
+    meta property="og:description" content="some_descriptions"
+
+   
+
     title Reports
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   body
+    #fb-root
+    javascript:
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=135675926603185";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
     header.navbar.navbar-fixed-top.navbar-inverse
       nav.navbar-inner
         .container
@@ -18,3 +39,5 @@ html
               = render 'layouts/messages'
               = yield
           footer
+            .fb-like data-href="https://github.com/mihaylova" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"
+
