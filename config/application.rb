@@ -6,6 +6,15 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+config_file = File.expand_path('../application.yml', __FILE__)
+if File.file?(config_file)
+  config = YAML.load(File.read(config_file))
+  config.merge! config.fetch(Rails.env, {})
+  config.each do |key,value|
+    ENV[key] = value.to_s
+  end
+end
+
 module MelonCourse
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
