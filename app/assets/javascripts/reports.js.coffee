@@ -28,7 +28,7 @@ $ ->
     obj =
       method: 'send',
       #link: link
-      link: "https://github.com/"
+      link: "http://lannisport-rails-93377.euw1-2.nitrousbox.com/"
       
     FB.ui obj
 
