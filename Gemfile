@@ -33,6 +33,9 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+#facebook graph - koala
+gem "koala", "~> 1.8.0rc1"
+
 
 
 
