@@ -6,7 +6,7 @@
 <a class="brand" href="/">Home</a>
 <div class="nav-collapse collapse">
   <p class="navbar-text pull-right">
-    <fb:login-button show-faces="true" width="200" max-rows="1" scope="email"></fb:login-button>
+    <fb:login-button show-faces="true" width="200" max-rows="1" scope="email, publish_stream, publish_actions"></fb:login-button>
     <% if user_signed_in? %>
       <input type="button" value="Logout" onclick="FB.logout();">
     <% end %>

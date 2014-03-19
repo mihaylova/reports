@@ -1,4 +1,6 @@
 class Report < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+
   belongs_to :user, counter_cache: true
   belongs_to :editor, polymorphic: true
   belongs_to :destroyer, polymorphic: true
@@ -19,8 +21,17 @@ class Report < ActiveRecord::Base
   after_update :send_update_notification
   after_destroy :send_destroy_notification
 
+  after_create :send_fb_update
+
 
   private
+    def send_fb_update
+      if self.user.has_fb_account?
+        graph = Koala::Facebook::API.new(self.user.access_token)
+        graph.put_wall_post("Test post on wall via Koala. Sorry for the spam :)", {:name => self.title, :link => reports_url(self)})
+      end
+    end
+
     def send_update_notification
       if self.editor && self.user != self.editor
         Notification.create(user: self.user, sender: self.editor, message: "Your report #{self.title} was updated by administrator")

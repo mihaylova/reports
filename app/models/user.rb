@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
   validates_attachment_file_name :image, :matches => [/png\Z/, /jpe?g\Z/]
 
 
+  def has_fb_account?
+    self.uid && self.provider == "facebook"
+  end
+
   private
     def send_notification
       Notification.create(user: self, sender: self.last_editor, message: "Your profile was updated by administrator")

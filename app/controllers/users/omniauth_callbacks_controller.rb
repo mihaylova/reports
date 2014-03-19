@@ -24,7 +24,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     graph = Koala::Facebook::GraphAPI.new(access_token)
     user_data = graph.get_object("me")
     
-    user = User.find_for_facebook_oauth(user_data, access_token)
+    user = User.find_for_facebook_oauth(user_data)
 
     if user.persisted?
       user.update(access_token: access_token)
