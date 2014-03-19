@@ -31,14 +31,25 @@ class User < ActiveRecord::Base
       Notification.create(user: self, sender: self.last_editor, message: "Your profile was updated by administrator")
     end
 
+  # def self.find_for_facebook_oauth(auth)
+  #   where(auth.slice(:provider, :uid)).first_or_create do |user|
+  #     user.provider = auth.provider
+  #     user.uid = auth.uid
+  #     user.email = auth.info.email
+  #     user.password = Devise.friendly_token[0,20]
+  #     user.name = auth.info.name
+  #     user.access_token = auth.credentials.token
+  #   end
+  # end
+
+
   def self.find_for_facebook_oauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
+    where(provider: 'facebook', uid: auth['id']).first_or_create do |user|
+      user.provider = 'facebook'
+      user.uid = auth['id']
+      user.email = auth['email']
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name
-      user.access_token = auth.credentials.token
+      user.name = auth['name']
     end
   end
 end

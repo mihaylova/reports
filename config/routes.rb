@@ -10,9 +10,12 @@ MelonCourse::Application.routes.draw do
   get "/account/edit" => "users#edit", as: "edit_account"
   get "/account" => "users#show", as: "account"
   post "/account/update" => "users#update", as: "update_account"
+  
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-
+  devise_scope :user do
+    get "/facebook_login" => "users/omniauth_callbacks#facebook_login"
+  end
 
   root to: "reports#index"
   # The priority is based upon order of creation: first created -> highest priority.
