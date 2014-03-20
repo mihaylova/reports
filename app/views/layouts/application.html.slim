@@ -6,7 +6,7 @@ html xmlns:fb="http://ogp.me/ns/fb#"
     meta property="og:title" content="#{@report.try(:title)|| "Reports"}"
     meta property="og:type" content="article"
     meta property="og:url" content="#{@report ? report_url(@report) : root_url}"
-    meta property="og:image" content="trump-mihailova.rhcloud.com/assets/images/cards690-366.jpg"
+    meta property="og:image" content="#{root_url}/fb.jpg"
     meta property="og:locale" content="en_US"
     meta property="og:description" content="#{@report ? @report.description.try(:truncate, 100, separator: ' ') : ""}"
 
