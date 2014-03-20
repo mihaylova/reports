@@ -13,7 +13,6 @@ h1 Listing reports
             |  - 
             == strip_tags(report.description).truncate(200, separator: ' ')
 
-          
           br
         .controls.btn-group.pull-right
           - if can? :edit, report
@@ -24,23 +23,4 @@ h1 Listing reports
 
 - if can? :create, Report
   = link_to 'New Report', new_report_path, class: 'btn btn-large'
-br
-hr
-hr
-hr
 
-.fb-send data-href="http://lannisport-rails-93377.euw1-2.nitrousbox.com/" data-colorscheme="dark"
-
-hr
-
-.fb-like data-href="http://lannisport-rails-93377.euw1-2.nitrousbox.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"
-
-hr
-hr
-hr
-
-.fb-comments data-href="http://lannisport-rails-93377.euw1-2.nitrousbox.com/" data-numposts="5" data-colorscheme="light"
-
-/ .fb-like data-href="#{root_url}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"
-/ .fb-comments data-href="#{root_url}" data-numposts="5" data-colorscheme="light"
-/.fb-send data-href="#{root_url}" data-colorscheme="dark"

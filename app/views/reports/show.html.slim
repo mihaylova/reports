@@ -22,6 +22,19 @@ p#notice= notice
     - if can? :destroy, @report
       = link_to "delete", @report, class: 'btn',:method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
 
-button#fb-share data-redirect_uri="#{report_url(@report)}" data-link="#{report_url(@report)}" data-picture="trump-mihailova.rhcloud.com/assets/images/cards690-366.jpg" data-name="#{@report.user.name}" data-caption="#{@report.title}" data-description= "#{@report.description.truncate(100, separator: ' ')}" Share with your friends
+br
+hr
+hr
+hr
 
-button#fb-send-link data-link="#{report_url(@report)}" Send report to friends
+.fb-send data-href="#{report_url(@report)}" data-colorscheme="dark"
+
+hr
+
+.fb-like data-href="#{report_url(@report)}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"
+
+hr
+hr
+hr
+
+.fb-comments data-href="#{report_url(@report)}" data-numposts="5" data-colorscheme="light"
