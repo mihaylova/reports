@@ -7,9 +7,21 @@ MelonCourse::Application.routes.draw do
   end
   resources :categories
 
-  get "/account" => "users#show", as: "account"
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+
+  get "/account" => "users#show", as: "account"
+  delete "/remove-fb-account" => "users#remove-fb-account", as: "remove_fb_account"
+
+  devise_for :users, :controllers => { 
+    :omniauth_callbacks => "users/omniauth_callbacks",
+    :registrations => "users/registrations"
+  }
+
+  devise_scope :user do
+    patch '/user/password/edit', to: 'users/registrations#update_password'
+    put '/user/password/edit', to: 'users/registrations#update_password'
+  end
 
 
   root to: "reports#index"

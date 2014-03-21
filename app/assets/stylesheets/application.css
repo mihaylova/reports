@@ -27,3 +27,6 @@ textarea {
   width: 913px;
   height: 428px;
 }
+
+
+.display-none { display: none !important; }

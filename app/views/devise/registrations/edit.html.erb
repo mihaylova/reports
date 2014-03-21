@@ -7,22 +7,28 @@
   <%= f.email_field :email, :autofocus => true %></div>
 
   <div><%= f.label :name %><br />
-  <%= f.email_field :name%></div>
+  <%= f.text_field :name%></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
 
   <div><%= f.submit "Update" %></div>
+<% end %>
+
+<br />
+<div class="account-controls">
+<a class="change" href="" title="">Change password</a>
+<% if @user.has_fb_account? %>
+  <a href="https://www.facebook.com/#{@user.uid}">Your facebook</a>
+  <% if @user.has_password? %>
+    <a href="<%= remove_fb_account_path %>" data-method="delete" title="FB remove">FB remove</a>
+  <% else %>
+    <%= t('You must set your password to remove your facebook account') %>
+  <% end %>  
+<% else %>
+  <a href="<%= user_omniauth_authorize_path(:facebook) %>" title="FB add">FB add</a>
 <% end %>
 
 <h3>Cancel my account</h3>
@@ -30,3 +36,36 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
 <%= link_to "Back", :back %>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.change').on('click', function() {
+        $('.popup-form').toggleClass('display-none');
+        return false;
+      });   
+    });
+  </script>
+</div>
+
+<div class="popup-form display-none">
+  <%= form_for(resource, :url => { :action => "update_password", :method => 'put' } ) do |f| %>
+    <div class="field">
+      <%= f.label :password, "Password" %>
+      <%= f.password_field :password, :autocomplete => "off"  %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <% if resource.has_password? %>
+    <div class="field">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, :required => true  %>
+    </div>
+    <% end %>
+    <div class="form-actions">
+      <input type="submit">
+    </div>
+  <% end %>
+</div>

@@ -69,6 +69,7 @@ describe User do
           user.provider.should eq auth_hash.provider
           user.email.should eq auth_hash.info.email
           user.name.should eq auth_hash.info.name
+          user.has_password.should eq false
         end
 
         it "should create new user" do
