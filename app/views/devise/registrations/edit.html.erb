@@ -28,7 +28,7 @@
   <% if @user.has_password? %>
     <a href="<%= remove_fb_account_path %>" data-method="delete" title="FB remove">FB remove</a>
   <% else %>
-    <%= t('You must set your password to remove your facebook account') %>
+    <span> You must set your password to remove your facebook account </span>
   <% end %>  
 <% else %>
   <a href="<%= user_omniauth_authorize_path(:facebook) %>" title="FB add">FB add</a>
@@ -68,7 +68,7 @@
     </div>
     <% end %>
     <div class="form-actions">
-      <input type="submit">
+      <input type="submit", value= "<%= @user.has_password? ? "Update" : "Set" %> Password">
     </div>
   <% end %>
 </div>

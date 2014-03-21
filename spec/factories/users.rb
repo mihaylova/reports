@@ -10,5 +10,10 @@ FactoryGirl.define do
     password_confirmation 12345678
     name "Ina Mihailova"
     editor true
-   end
+
+    factory :user_with_fb do
+      provider "facebook"
+      uid 123123123131231321
+    end
+  end
 end
