@@ -36,22 +36,26 @@ class User < ActiveRecord::Base
     user
   end
 
+  def has_fb_account?
+    provider == "facebook" && uid
+  end
 
-    def add_fb_account(auth)
-      self if self.update(uid: auth.uid, provider: auth.provider)
-    end
+  def add_fb_account(auth)
+    self if self.update(uid: auth.uid, provider: auth.provider)
+  end
 
-    def self.create_whit_fb_account(auth)
-      user = User.new(
-        provider: auth.provider,
-        uid: auth.uid,
-        email:  auth.info.email,
-        password:  Devise.friendly_token[0,20],
-        name: auth.info.name,
-        )
+  def self.create_whit_fb_account(auth)
+    user = User.new(
+      provider: auth.provider,
+      uid: auth.uid,
+      email:  auth.info.email,
+      password:  Devise.friendly_token[0,20],
+      name: auth.info.name,
+      has_password: false
+      )
 
-      user if user.save
-    end
+    user if user.save
+  end
 
   private
     def send_notification
