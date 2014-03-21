@@ -26,18 +26,35 @@ class User < ActiveRecord::Base
   validates_attachment_file_name :image, :matches => [/png\Z/, /jpe?g\Z/]
 
 
+
+ def self.find_for_facebook_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+    unless user
+      user = User.where(email: auth.info.email).first
+      user = user ? user.add_fb_account(auth) : create_whit_fb_account(auth)
+    end
+    user
+  end
+
+
+    def add_fb_account(auth)
+      self if self.update(uid: auth.uid, provider: auth.provider)
+    end
+
+    def self.create_whit_fb_account(auth)
+      user = User.new(
+        provider: auth.provider,
+        uid: auth.uid,
+        email:  auth.info.email,
+        password:  Devise.friendly_token[0,20],
+        name: auth.info.name,
+        )
+
+      user if user.save
+    end
+
   private
     def send_notification
       Notification.create(user: self, sender: self.last_editor, message: "Your profile was updated by administrator")
     end
-
-  def self.find_for_facebook_oauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name
-    end
-  end
 end
