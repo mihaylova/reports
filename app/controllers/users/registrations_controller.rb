@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 private
     def user_params
-      params.require(:user).permit(:email, :name)
+      params.require(:user).permit(:email, :name, :image)
     end
 
     def user_password_params
