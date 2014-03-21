@@ -47,5 +47,6 @@ RSpec.configure do |config|
   config.order = "random"
   config.include Paperclip::Shoulda::Matchers
   config.include Devise::TestHelpers, :type => :controller
+  OmniAuth.config.test_mode = true
 
 end
