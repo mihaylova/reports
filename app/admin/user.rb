@@ -47,7 +47,19 @@ ActiveAdmin.register User do
   action_item :only => :show do
     link_to('Become', become_admin_user_path(user))
   end
-  
+
+
+  action_item :only => :edit do
+    link_to("Remove facebook account", remove_fb_account_admin_user_path(user)) if user.has_fb_account?
+  end
+
+  member_action :remove_fb_account do
+    user = User.find(params[:id])
+    user.update(uid: nil, provider: nil)
+    redirect_to admin_user_path(user)
+  end
+
+
   index do
     selectable_column
 
@@ -56,8 +68,10 @@ ActiveAdmin.register User do
     column :editor
     column ("Reports") {|user| link_to user.reports_count, reports_admin_user_path(user)}
     # column ("Reports", sortable: :reports_count) {|user| link_to user.reports_count, reports_admin_user_path(user)}
+
     column :created_at
     column :updated_at
+    column ("") {|user| user.has_fb_account? ? (link_to "facebook account", "https://www.facebook.com/#{user.uid}") : "Not Set"}
     column ("") {|user| link_to "become", become_admin_user_path(user)}
     actions
   end
@@ -71,6 +85,7 @@ ActiveAdmin.register User do
         row ("Editor"){ |user| user.editor? ? "YES" : "NO" }
         row :created_at
         row :updated_at
+        row ("Facebook account") {|user| user.has_fb_account? ? (link_to "facebook account", "https://www.facebook.com/#{user.uid}") : "Not Set"}
       end
     end
 
