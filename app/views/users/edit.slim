@@ -1,9 +1,0 @@
-.span10
-  .well
-    = simple_form_for @user, :url => update_account_path, :method => :post, :html => { :multipart => true, class: "form-horizontal" } do |f|
-      .control-group
-        = f.input :name
-      .control-group.offset1
-        = f.file_field :image
-      .actions.pull-right
-        = f.submit "Update"

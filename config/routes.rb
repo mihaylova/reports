@@ -7,9 +7,7 @@ MelonCourse::Application.routes.draw do
   end
   resources :categories
 
-  get "/account/edit" => "users#edit", as: "edit_account"
   get "/account" => "users#show", as: "account"
-  post "/account/update" => "users#update", as: "update_account"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

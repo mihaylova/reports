@@ -12,7 +12,7 @@
             td= @user.name
       = image_tag @user.image.url(:large), class: "img-polaroid"
     .pull-right
-      =link_to "Edit profile", edit_account_path, class: "btn"
+      =link_to "Edit profile", edit_user_registration_path, class: "btn"
 
 -unless @user.has_fb_account?
-  =link_to "Add facebook acount", user_omniauth_authorize_path(:facebook)
+  =link_to "Add facebook account", user_omniauth_authorize_path(:facebook)
