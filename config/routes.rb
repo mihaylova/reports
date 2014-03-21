@@ -11,7 +11,7 @@ MelonCourse::Application.routes.draw do
 
 
   get "/account" => "users#show", as: "account"
-  delete "/remove-fb-account" => "users#remove-fb-account", as: "remove_fb_account"
+  delete "/remove-fb-account" => "users#remove_fb_account", as: "remove_fb_account"
 
   devise_for :users, :controllers => { 
     :omniauth_callbacks => "users/omniauth_callbacks",
