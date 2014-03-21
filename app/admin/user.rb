@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :name, :editor, :password, :password_confirmation, :last_editor_id
+  permit_params :email, :name, :editor, :password, :password_confirmation, :last_editor_id, :has_password
   menu priority: 3
   menu :label => "Authors"
   menu :parent => "Users"
@@ -8,10 +8,15 @@ ActiveAdmin.register User do
 
   controller do
     before_action :check_for_pass, only: :update
+    before_action :update_has_pass, only: :update
     before_action :add_editor_info, only: :update
 
     def add_editor_info
       request.params["user"].merge!({last_editor_id: current_admin_user.id})
+    end
+
+    def update_has_pass
+      request.params["user"].merge!({has_password: true}) if request.params["user"].has_key?(:password)
     end
 
     def check_for_pass
@@ -86,6 +91,7 @@ ActiveAdmin.register User do
         row :created_at
         row :updated_at
         row ("Facebook account") {|user| user.has_fb_account? ? (link_to "facebook account", "https://www.facebook.com/#{user.uid}") : "Not Set"}
+        row ("Password"){|user| user.has_password? ? "YES" : "NO" }
       end
     end
 
@@ -111,6 +117,7 @@ ActiveAdmin.register User do
     f.inputs "Change Password" do
       f.input :password
       f.input :password_confirmation
+      f.input :has_password
     end
     f.actions
   end
