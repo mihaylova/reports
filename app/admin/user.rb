@@ -60,8 +60,12 @@ ActiveAdmin.register User do
 
   member_action :remove_fb_account do
     user = User.find(params[:id])
-    user.update(uid: nil, provider: nil)
-    redirect_to admin_user_path(user)
+    if user.has_password?
+      user.update(uid: nil, provider: nil)
+      redirect_to admin_user_path(user)
+    else
+      redirect_to edit_admin_user_path(user), alert: "You can't remove facebook account on user who don't have active password"
+    end
   end
 
 
