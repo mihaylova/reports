@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
     self.provider = auth.provider
     self.fb_picture = auth.info.image
     self.location = auth.info.location unless self.location? 
+    self.last_editor_id = nil
     self.save ? self : nil
   end
 
@@ -69,6 +70,6 @@ class User < ActiveRecord::Base
 
   private
     def send_notification
-      Notification.create(user: self, sender: self.last_editor, message: "Your profile was updated by administrator")
+      Notification.create(user: self, sender: self.last_editor, message: "Your profile was updated by administrator") if self.last_editor
     end
 end

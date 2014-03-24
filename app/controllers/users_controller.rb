@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def remove_fb_account
     if @user.has_password?
-      @user.update({provider: nil, uid: nil})
+      @user.update({provider: nil, uid: nil, last_editor_id: nil})
       redirect_to account_path
     else
       redirect_to edit_user_registration_path, alert: "Your facebook account wasn't removed"

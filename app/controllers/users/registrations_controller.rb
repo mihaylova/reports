@@ -22,11 +22,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 private
     def user_params
-      params.require(:user).permit(:email, :name, :image)
+      params.require(:user).permit(:email, :name, :image).merge!({last_editor_id: nil})
     end
 
     def user_password_params
       attributes = params.require(:user).permit(:password, :password_confirmation, :current_password)
+      attributes.merge!({last_editor_id: nil})
       unless @user.has_password?
         attributes.delete :current_password
         attributes.store(:has_password, true)
