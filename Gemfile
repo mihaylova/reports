@@ -34,6 +34,9 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 
+gem "koala", "~> 1.8.0rc1"
+
+
 
 
 # Use SCSS for stylesheets

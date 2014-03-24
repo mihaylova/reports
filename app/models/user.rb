@@ -36,12 +36,20 @@ class User < ActiveRecord::Base
     user
   end
 
+  def has_image?
+    self.image.url != "/images/original/missing.jpeg"
+  end
+
   def has_fb_account?
     provider == "facebook" && uid
   end
 
   def add_fb_account(auth)
-    self if self.update(uid: auth.uid, provider: auth.provider)
+    self.uid = auth.uid
+    self.provider = auth.provider
+    self.fb_picture = auth.info.image
+    self.location = auth.info.location unless self.location? 
+    self.save ? self : nil
   end
 
   def self.create_whit_fb_account(auth)
@@ -51,7 +59,9 @@ class User < ActiveRecord::Base
       email:  auth.info.email,
       password:  Devise.friendly_token[0,20],
       name: auth.info.name,
-      has_password: false
+      has_password: false,
+      location: auth.info.location,
+      fb_picture: auth.info.image
       )
 
     user if user.save

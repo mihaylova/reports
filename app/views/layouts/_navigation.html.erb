@@ -12,7 +12,11 @@
         <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> 
       </div>
       <div class="image pull-right">
-        <%=image_tag(current_user.image.url(:small)) %>
+        <% if current_user.has_image? %>
+          <%=image_tag(current_user.image.url(:small)) %>
+        <%else %>
+          <%=image_tag(current_user.fb_picture) %>
+        <% end %>
     </div>
     <% else %>
       <%= link_to('Login', new_user_session_path)  %>

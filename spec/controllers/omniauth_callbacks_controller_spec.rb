@@ -12,7 +12,7 @@ describe Users::OmniauthCallbacksController do
       OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
         :provider => 'facebook', 
         :uid => '123545', 
-        :info => {email: "email@example.com", name: "Name"}
+        :info => {email: "email@example.com", name: "Name", location: "Some location", image: "URL to image"}
       })
     end
 
@@ -34,6 +34,8 @@ describe Users::OmniauthCallbacksController do
         expect(user.name).to eq 'Name'
         expect(user.provider).to eq 'facebook'
         expect(user.uid).to eq '123545'
+        expect(user.location).to eq 'Some location'
+        expect(user.fb_picture).to eq 'URL to image'
       end
     end
 
@@ -61,9 +63,10 @@ describe Users::OmniauthCallbacksController do
           expect(@user.provider).to eq "facebook"
         end
 
-        xit "set set user data from fb if not exist in db" do
+        it "set set user data from fb if not exist in db" do
           @user.reload
-          expect(@user.birthday).to eq Date.new 2000, 01, 01
+          expect(@user.location).to eq "Some location"
+          expect(@user.fb_picture).to eq "URL to image"
         end
       end
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321075316) do
+ActiveRecord::Schema.define(version: 20140324084447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20140321075316) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "has_password",           default: true
+    t.string   "fb_picture"
+    t.string   "location"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
