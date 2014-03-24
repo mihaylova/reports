@@ -10,6 +10,10 @@
           tr
             td Name:
             td= @user.name
-      = image_tag @user.image.url(:large), class: "img-polaroid"
+          tr
+            td Location:
+            td= @user.location
+      - if @user.has_image?
+        = image_tag @user.image.url(:large), class: "img-polaroid"
     .pull-right
       =link_to "Edit profile", edit_user_registration_path, class: "btn"

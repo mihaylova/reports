@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 private
     def user_params
-      params.require(:user).permit(:email, :name, :image).merge!({last_editor_id: nil})
+      params.require(:user).permit(:email, :name, :image, :location).merge!({last_editor_id: nil})
     end
 
     def user_password_params
