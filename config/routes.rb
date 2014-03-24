@@ -11,6 +11,7 @@ MelonCourse::Application.routes.draw do
 
 
   get "/account" => "users#show", as: "account"
+  get "account/notifications" => "users#notifications", as: 'user_notifications'
   delete "/remove-fb-account" => "users#remove_fb_account", as: "remove_fb_account"
 
   devise_for :users, :controllers => { 

@@ -27,13 +27,17 @@ class User < ActiveRecord::Base
 
 
 
- def self.find_for_facebook_oauth(auth)
+  def self.find_for_facebook_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
     unless user
       user = User.where(email: auth.info.email).first
       user = user ? user.add_fb_account(auth) : create_whit_fb_account(auth)
     end
     user
+  end
+
+  def new_notifications
+    self.notifications.where(is_new: true)
   end
 
   def has_image?

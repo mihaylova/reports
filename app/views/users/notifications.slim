@@ -1,0 +1,6 @@
+.class
+-@notifications.each do |notification|
+  .notification
+    div class=(notification.is_new? ? 'new' : 'old')
+      p=notification.message
+      p=notification.sender.email
