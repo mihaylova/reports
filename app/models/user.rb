@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :edited_reports, as: :editor, class_name: "Report"
   has_many :destroyed_reports, as: :destroyer, class_name: "Report"
   belongs_to :last_editor, class_name: "AdminUser"
+  has_many :comments
 
 
   accepts_nested_attributes_for :reports

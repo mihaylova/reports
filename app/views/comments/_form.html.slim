@@ -1,0 +1,11 @@
+.comment-form
+
+
+  div[class=comments_form_class(@comment)]
+  	.error
+    = simple_form_for(@comment, :url => comments_form_url(@report, @comment), remote: true) do |f|
+   
+      .inputs
+        = f.input :text, :label => false
+        br
+        = f.button :submit

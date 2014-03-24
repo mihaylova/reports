@@ -29,5 +29,10 @@ $ ->
 
 
 
+  $('#add_comment').click () ->
+    $(this).addClass("invisible")
+    $('#new-comment').removeClass("invisible")
+
+
 
 

@@ -38,3 +38,13 @@ hr
 hr
 
 .fb-comments data-href="#{report_url(@report)}" data-numposts="5" data-colorscheme="light"
+
+
+
+#comments
+  = render @report.comments.order('created_at')
+- if user_signed_in?
+  button#add_comment
+    i.icon-comment  Comment
+  #new-comment.invisible
+    = render :partial => '/comments/form'

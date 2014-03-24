@@ -11,4 +11,5 @@ describe Report do
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:category) }
+  it { should have_many(:comments).dependent(:destroy) }
 end

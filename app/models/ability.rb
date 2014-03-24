@@ -16,11 +16,16 @@ class Ability
         can :destroy, Report, permissions: {editor_can_delete: true}
         can :update, Report, permissions: {author_can_edit: true}, user_id: user.id
         can :destroy, Report, permissions: {author_can_delete: true}, user_id: user.id
+        can :update, Comment
+        can :destroy, Comment
       else
         can :create, :all
         can :read, :all
         can :update, Report, permissions: {author_can_edit: true}, user_id: user.id
         can :destroy, Report, permissions: {author_can_delete: true}, user_id: user.id
+        can :update, Comment, user_id: user.id
+        can :destroy, Comment, user_id: user.id
+        can :destroy, Comment, report: {user_id: user.id}
       end
 
       #  if user.new_record?
