@@ -31,66 +31,66 @@ describe 'Registrations' do
     end
 
     # TODO: Tests whit JS
-    # describe "#update_password" do
-    #   context "user has password" do
-    #     it "contain cuurent_password field" do
-    #       expect(page).to have_selector "#user_current_password"
-    #     end
+    describe "#update_password" do
+      context "user has password" do
+        it "contain cuurent_password field" do
+          expect(page).to have_selector "#user_current_password"
+        end
 
-    #     context "current_path is not fill" do
-    #       before do
-    #         fill_in 'user_password', with: "new_password"
-    #         fill_in 'user_password_confirmation', with: "new_password"
-    #         click_on 'Update Password'
-    #       end
+        context "current_path is not fill" do
+          before do
+            fill_in 'user_password', with: "new_password"
+            fill_in 'user_password_confirmation', with: "new_password"
+            click_on 'Update Password'
+          end
 
-    #       it "render edit password page" do
-    #         expect(page.current_path).to eq "/user/password/edit"
-    #       end
-    #     end
+          it "render edit password page" do
+            expect(page.current_path).to eq "/user/password/edit"
+          end
+        end
 
-    #     context "current_password is fill" do
-    #       before do
-    #         fill_in 'user_password', with: "new_password"
-    #         fill_in 'user_password_confirmation', with: "new_password"
-    #         fill_in 'user_current_password', with: "12345678"
-    #         click_on 'Update Password'
-    #       end
+        context "current_password is fill" do
+          before do
+            fill_in 'user_password', with: "new_password"
+            fill_in 'user_password_confirmation', with: "new_password"
+            fill_in 'user_current_password', with: "12345678"
+            click_on 'Update Password'
+          end
 
-    #       it "render show page" do
-    #         expect(page.current_path).to eq account_path
-    #       end
-    #     end
-    #   end
+          it "render show page" do
+            expect(page.current_path).to eq account_path
+          end
+        end
+      end
 
-    #   context "users hasn't password" do
-    #     before do
-    #       @user.update({has_password: false})
-    #       @user.reload
-    #       visit edit_user_registration_path
-    #     end
+      context "users hasn't password" do
+        before do
+          @user.update({has_password: false})
+          @user.reload
+          visit edit_user_registration_path
+        end
 
-    #     it " not contain cuurent_password field" do
-    #       expect(page).not_to have_selector "#account_password"
-    #     end
-    #     context "After fill password" do
-    #       before do
-    #         fill_in 'user_password', with: "new_password"
-    #         fill_in 'user_password_confirmation', with: "new_password"
-    #         click_on 'Set Password'
-    #       end
+        it " not contain cuurent_password field" do
+          expect(page).not_to have_selector "#account_password"
+        end
+        context "After fill password" do
+          before do
+            fill_in 'user_password', with: "new_password"
+            fill_in 'user_password_confirmation', with: "new_password"
+            click_on 'Set Password'
+          end
 
-    #       it "render show page" do
-    #         expect(page.current_path).to eq account_path
-    #       end
+          it "render show page" do
+            expect(page.current_path).to eq account_path
+          end
 
-    #       it "set user has_password to true" do
-    #         @user.reload
-    #         expect(@user.has_password).to eq true
-    #       end
-    #     end
-    #   end
-    # end
+          it "set user has_password to true" do
+            @user.reload
+            expect(@user.has_password).to eq true
+          end
+        end
+      end
+    end
 
 
     describe "Facebook acount" do
