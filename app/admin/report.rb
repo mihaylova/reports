@@ -2,6 +2,11 @@ ActiveAdmin.register Report do
 menu priority: 4
 permit_params :title, :description, :user_id, :category_id, :editor_id, :editor_type, {permissions_attributes: [:author_can_edit, :author_can_delete, :editor_can_edit, :editor_can_delete]}
 
+
+  action_item :only => :show do
+    link_to('View comments', admin_report_comments_path(report))
+  end
+
 controller do
     def user_reports
       @reports = Report.where(user_id: params[:user_id]).page(params[:page]).per(10)
@@ -51,7 +56,6 @@ controller do
         row ("Editor can delete report"){ |permissions| permissions.editor_can_delete? ? "YES" : "NO" }
       end
     end
-    active_admin_comments
   end
 
   form do |f|

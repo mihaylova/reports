@@ -108,7 +108,6 @@ ActiveAdmin.register User do
         row :sign_in_count
       end
     end
-    active_admin_comments
   end
 
   form do |f|
