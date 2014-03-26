@@ -240,7 +240,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.3.0)
+    turbolinks (2.2.1)
       coffee-rails
     twitter-bootstrap-rails (2.2.7)
       actionpack (>= 3.1)
@@ -284,6 +284,6 @@ DEPENDENCIES
   simple_form
   slim-rails
   therubyracer
-  turbolinks
+  turbolinks (~> 2.2.1)
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
