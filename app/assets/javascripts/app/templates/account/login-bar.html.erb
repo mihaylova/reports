@@ -1,0 +1,12 @@
+
+<div ng-controller="Login">
+  <span ng-hide="!!currentUser || !!current_user">
+    <input type="text" ng-model="username">
+    <input type="password" ng-model="password">
+    <button ng-click="signin(username, password)"> Sign In </button>
+  </span>
+  <!-- TODO: Fix user ability -->
+  <span ng-show="!!currentUser || !!current_user">
+    <button ng-click="signout()"> Sign Out </button>
+  </span>
+</div>

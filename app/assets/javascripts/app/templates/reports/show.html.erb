@@ -1,0 +1,54 @@
+
+<div class="report hero-unit">
+  <div class="well well-small pull-right author">
+    <p>
+      "Created before {{report.created_at}} by {{report.user.name}}" 
+    </p>
+  </div>
+  <div class="report-data">
+    <h1> {{ report.title }} </h1>
+    <div class="text"> {{ report.description }} </div>
+  </div>
+
+  <div class="pictures">
+    <a class="btn btn-inverse btn-large" href="/reports/{{report.id}}/pictures"> Gallery </a>
+  </div>
+
+  <div class="controls btn-group pull-right">
+    <span  ng-show="report.can_edit">
+      <a class="btn btn-mini" href="#/reports/{{report.id}}/edit">edit</a>
+    </span>
+    <span  ng-show="report.can_destroy">
+      <button data-confirm="Are you sure?"  ng-click="delete(report.id)" class="btn btn-mini">delete</button>
+    </span>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<hr>
+<hr>
+<hr>
+
+<div class="fb-send" data-href="http://localhost:3000/reports/{{report.id}}" data-colorscheme="dark"> </div>
+
+<hr>
+
+<div class="fb-like" data-href="http://localhost:3000/reports/{{report.id}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"> </div>
+
+<hr>
+<hr>
+<hr>
+
+<div class="fb-comments" data-href="http://localhost:3000/reports/{{report.id}}" data-numposts="5" data-colorscheme="light"> </div>
+
+
+<!-- 
+#comments
+  = render @report.comments.order('created_at')
+- if user_signed_in?
+  button#add_comment
+    i.icon-comment  Comment
+  #new-comment.invisible
+    = render :partial => '/comments/form'

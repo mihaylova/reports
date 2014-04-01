@@ -20,7 +20,7 @@ class Report < ActiveRecord::Base
   after_update :send_update_notification
   after_destroy :send_destroy_notification
 
-
+  attr_accessor :can_edit,:can_read,:can_destroy
   private
     def send_update_notification
       if self.editor && self.user != self.editor

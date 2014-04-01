@@ -1,0 +1,19 @@
+<errors ng-if="errors"></errors>
+
+<div class="field">
+  <label for="title">Title</label><br>
+  <input type="text" id="title" ng-model="report.title" />
+</div>
+<div class="field">
+  <label for="body">Body</label><br>
+  <textarea rows="4" cols="50" ng-model="report.description"></textarea>
+  <% Category.all.each do |cat|%>
+  <p> kjjksdfjhdskjfhjdskfh </p>
+  <input type="radio" name="report" value="<%=cat.id%>" ng-model="report.category_id"> <%= cat.name %>
+  <%end%>
+</div>
+<div class="actions">
+  <button class="btn btn-primary" ng-click="submit()">
+    Submit
+  </button>
+</div>

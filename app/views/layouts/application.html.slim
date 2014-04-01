@@ -1,5 +1,5 @@
 doctype 5
-html xmlns:fb="http://ogp.me/ns/fb#"
+html ng-app="#{@ng_app || 'app'}"
   head
     meta property="fb:app_id" content="135675926603185"
     meta property="og:site_name" content="Reports"
@@ -15,6 +15,7 @@ html xmlns:fb="http://ogp.me/ns/fb#"
     title Reports
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    / = javascript_include_tag "app/#{@ng_app || 'app'}"
     = csrf_meta_tags
     script src="//connect.facebook.net/en_US/all.js"
   body
@@ -38,6 +39,6 @@ html xmlns:fb="http://ogp.me/ns/fb#"
           .row
             .span12
               = render 'layouts/messages'
-              = yield
+              ng-view
           footer
             

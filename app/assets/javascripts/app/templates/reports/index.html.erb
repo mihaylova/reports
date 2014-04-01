@@ -1,0 +1,40 @@
+<h1> Listing reports </h1>
+<div class="reports">
+  <input ng-model="query"/>
+  <div ng-repeat="report in reports | filter: query | orderBy: order">
+    <div class="well well-small">
+      <div class="row">
+        <div class="span10">
+          <span class="title">
+            <p  ng-show="report.can_read">
+              <a href="#/reports/{{report.id}}">{{ report.title }}</a>
+            </p>
+            <p  ng-hide="report.can_read">
+              {{ report.title }}
+            </p>
+          </span>
+          <span class="text">
+<!--             |  - 
+            == strip_tags(report.description).truncate(200, separator: ' ') -->
+            {{ report.description }}
+          </span>
+          <br>
+          <div class="controls btn-group pull-right">
+            <span  ng-show="report.can_edit">
+              <a class="btn btn-mini" href="#/reports/{{report.id}}/edit">edit</a>
+            </span>
+            <span  ng-show="report.can_destroy">
+              <button ng-click="delete($index, report.id)" class="btn btn-mini">delete</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+</div>
+<div ng-show="!!currentUser || !!current_user">
+  <a class="btn btn-large" href="#/reports/new">New report</a>
+</div>
+
+

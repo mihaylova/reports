@@ -1,0 +1,23 @@
+#= require ./base
+#= require_tree .
+#= require_self
+
+angular.module('app', [
+  'ngRoute'
+  'ngResource'
+  # 'app.factories',
+  'app.services',
+  "app.services.identity",
+  'app.directives',
+  # 'app.filters',
+  'app.controllers.reports',
+  'app.controllers.login',
+  'ng-rails-csrf'
+]).
+config ['$routeProvider', ($routeProvider) ->
+  $routeProvider.when '/', templateUrl: '<%= asset_path("app/templates/reports/index.html") %>', controller: 'Reports'
+  $routeProvider.when '/reports/new', templateUrl: '<%= asset_path("app/templates/reports/new.html") %>', controller: 'NewReport'
+  $routeProvider.when '/reports/:id/edit', templateUrl: '<%= asset_path("app/templates/reports/edit.html") %>', controller: 'EditReport'
+  $routeProvider.when '/reports/:id', templateUrl: '<%= asset_path("app/templates/reports/show.html") %>', controller: 'ShowReport'
+  $routeProvider.otherwise redirectTo: '/'
+]
