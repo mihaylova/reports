@@ -24,11 +24,8 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update(comment_params)
-      respond_to do |format|
-        format.js
-      end
-    end
+    @comment.update(comment_params)
+    render json: @comment
   end
 
   def destroy

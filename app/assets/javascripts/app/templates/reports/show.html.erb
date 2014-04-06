@@ -43,26 +43,32 @@
 <div class="fb-comments" data-href="http://localhost:3000/reports/{{report.id}}" data-numposts="5" data-colorscheme="light"> </div>
 
  -->
-
+{{ comment }}
 <div id="comments">
    <div ng-repeat="comment in comments">
     <div class="well">
-      <p class="info pull-right"> 
-        "Created at {{ comment.created_at }} by {{ comment.author_name}}"
-        <span ng-show="comment.updated">
-          "Updated at {{ comment.updated_at }}"
-        </span>
-      </p>
-      <p class="text"> 
-        {{ comment.text }}
-      </p> 
-      <div class="actions controls btn-group pull-right">
-          <span  ng-show="comment.can_edit">
-            <!-- <button ng-click="edit_comment($index, comment.id)" class="btn btn-mini">edit</button> -->
+      <div ng-show="comment.edit_mode" id="form-comment{{comment.id}}">
+        <input type="text" ng-model="comment.text">
+        <button ng-click="update_comment($index)" class="btn btn-inverse"> Update comment </button>
+      </div>
+      <div ng-hide="comment.edit_mode" id="comment{{comment.id}}">
+        <p class="info pull-right"> 
+          "Created at {{ comment.created_at }} by {{ comment.author_name}}"
+          <span ng-show="comment.updated">
+            "Updated at {{ comment.updated_at }}"
           </span>
-          <span  ng-show="comment.can_destroy">
-            <button ng-click="delete_comment($index, comment.id)" class="btn btn-mini">delete</button>
-          </span>
+        </p>
+        <p class="text"> 
+          {{ comment.text }}
+        </p> 
+        <div class="actions controls btn-group pull-right">
+            <span  ng-show="comment.can_edit">
+              <button ng-click="edit_comment($index)" class="btn btn-mini">edit</button>
+            </span>
+            <span  ng-show="comment.can_destroy">
+              <button ng-click="delete_comment($index, comment.id)" class="btn btn-mini">delete</button>
+            </span>
+        </div>
       </div>
     </div>
     <hr>
