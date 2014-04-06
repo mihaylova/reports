@@ -43,7 +43,7 @@
 <div class="fb-comments" data-href="http://localhost:3000/reports/{{report.id}}" data-numposts="5" data-colorscheme="light"> </div>
 
  -->
-<div id="comments">
+<div id="comments" ng-controller="Comments">
    <div ng-repeat="comment in comments">
     <div class="well">
       <div ng-show="comment.edit_mode" id="form-comment{{comment.id}}">
