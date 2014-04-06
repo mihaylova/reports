@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 20140324135515) do
     t.integer  "reports_count",          default: 0
     t.string   "provider"
     t.string   "uid"
-    t.string   "access_token"
     t.integer  "last_editor_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
