@@ -28,8 +28,8 @@ $ ->
   FB.Event.subscribe('message.send', message_send_callback)
 
 
-
-  $('#add_comment').click () ->
+$ ->
+  $(document).on 'click', '#add_comment', (e) ->
     $(this).addClass("invisible")
     $('#new-comment').removeClass("invisible")
 

@@ -4,19 +4,23 @@ class CommentsController < ApplicationController
   load_and_authorize_resource 
   skip_load_resource only: [:create]
 
-  def edit
-    respond_to do |format|
-      format.js
+  def index
+    @report.comments.each do |comment|
+      comment.can_edit = can?(:edit,comment) 
+      comment.can_destroy = can?(:destroy,comment)
+      comment.updated = comment.updated?
+      comment.author_name = comment.user.name
     end
+    render json: @report.comments
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    if (user_signed_in?) && @comment.save
-      respond_to do |format|
-        format.js
-      end
-    end
+    @comment = Comment.create(comment_params)
+    @comment.can_edit = can?(:edit, @comment) 
+    @comment.can_destroy = can?(:destroy, @comment)
+    @comment.updated = @comment.updated?
+    @comment.author_name = @comment.user.name
+    render json: @comment
   end
 
   def update
@@ -29,9 +33,6 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    respond_to do |format|
-      format.js
-    end
   end
 
   private

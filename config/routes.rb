@@ -5,7 +5,7 @@ MelonCourse::Application.routes.draw do
   get "/admin/users/:user_id/reports" => 'admin/reports#user_reports', as: "reports_admin_user"
   resources :reports do
     resources :pictures, except: [:new, :edit, :update]
-    resources :comments, except: [:index, :show]
+    resources :comments, except: [:edit, :show, :new]
   end
   resources :categories, only: :index
 
