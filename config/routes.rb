@@ -7,7 +7,7 @@ MelonCourse::Application.routes.draw do
     resources :pictures, except: [:new, :edit, :update]
     resources :comments, except: [:index, :show]
   end
-  resources :categories
+  resources :categories, only: :index
 
 
 

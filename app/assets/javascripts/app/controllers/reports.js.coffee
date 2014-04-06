@@ -11,7 +11,8 @@ angular.module('app.controllers.reports', [])
 
       new Report().$delete({id: id}, success, failure)
   ]
-  .controller 'NewReport', ['$scope', '$location', 'Report', ($scope, $location, Report) ->
+  .controller 'NewReport', ['$scope', '$location', 'Report', 'Category', ($scope, $location, Report, Category) ->
+    $scope.categories = Category.query()
     $scope.report =
       title: ''
       description: ''
@@ -31,7 +32,8 @@ angular.module('app.controllers.reports', [])
 
       new Report({report: $scope.report}).$save({}, success, failure)
   ]
-  .controller 'EditReport', ['$scope', '$location', '$routeParams', 'Report', ($scope, $location, $routeParams, Report) ->
+  .controller 'EditReport', ['$scope', '$location', '$routeParams', 'Report', 'Category',  ($scope, $location, $routeParams, Report, Category) ->
+    $scope.categories = Category.query()
     $scope.report = Report.get({id: $routeParams.id})
 
     $scope.submit = ->
